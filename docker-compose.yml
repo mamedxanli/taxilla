@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: "postgres:9.6"
+  rabbit:
+    image: "rabbitmq:3"
+  web:
+    build: .
+    ports:
+     - "8099:8099"
+    volumes:
+     - .:/src/
+     - ./config/:/src/config/
+    depends_on:
+     - db
+     - rabbit
+    # This will run the application in foreground and display stdout and stderr to the user.
+    command: ["/src/wait-for-services.sh", "db", "/src/docker-entrypoint.sh"]

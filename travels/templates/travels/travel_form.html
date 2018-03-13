@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load extras %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css' %}">
+<link rel="stylesheet" href="{% static 'assets/plugins/datetimepicker/jquery.datetimepicker.min.css' %}">
+{% endblock %}
+
+{% block title %}
+    <title>{% if object %}Update the {% else %}Create a new {% endif %}request | Taxilla</title>
+{% endblock %}
+
+{% block main %}
+<!-- Page Content -->
+<div class="container content">
+  <form class="sky-form sky-no-border" method="post">
+  {% csrf_token %}
+    <div class="row">
+
+      <div class="col-sm-6 content-boxes-v3">
+        <div class="clearfix margin-bottom-30">
+          <i class="icon-custom icon-md rounded-x icon-bg-u icon-line icon-pointer"></i>
+          <div class="content-boxes-in-v3">
+            <p>Pickup Location</p>
+            <h2 class="heading-sm"><label class="input{% if form.pickup.errors %} state-error{% endif %}">{{ form.pickup }}</label></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 content-boxes-v3 content-boxes-v3-right sm-margin-bottom-30">
+        <div class="clearfix margin-bottom-30">
+          <i class="icon-custom icon-md rounded-x icon-bg-u icon-line icon-flag"></i>
+          <div class="content-boxes-in-v3">
+            <p>Destination</p>
+            <h2 class="heading-sm"><label class="input{% if form.dropoff.errors %} state-error{% endif %}">{{ form.dropoff }}</label></h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+
+        <div class="row content-boxes-v2 content-boxes-v2-o">
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-calendar"></i>
+              <span><small>Pickup date & time </small><label class="input{% if form.date_time.errors %} state-error{% endif %}">{{ form.date_time }}</label></span>
+            </h2>
+          </div>
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-users"></i>
+              <span><small>Up to number of passengers</small><label class="select{% if form.no_of_passengers.errors %} state-error{% endif %}">{{ form.no_of_passengers }}<i></i></label></span>
+            </h2>
+          </div>
+        </div>
+
+        <div class="service-block-v8 service-block-v8-request-detail">
+          <div class="service-block-desc">
+            <h3>Additional Notes</h3>
+            <label class="textarea{% if form.notes.errors %} state-error{% endif %}">{{ form.notes }}</label>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div id="map"></div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <br></br>
+    {{ form.pickup_data }}
+    {{ form.dropoff_data }}
+    {{ form.geolocation }}
+    <div class="row text-center">
+      <button type="submit" class="btn-u rounded">Submit</button>
+      <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-dark rounded" onclick="window.history.back();">Back</button>
+    </div>
+  </form>
+</div>
+<!-- /.container -->
+{% endblock %}
+
+{% block foot %}
+{{ block.super }}
+<script type="text/javascript" src={% static 'assets/plugins/datetimepicker/jquery.datetimepicker.full.min.js' %}></script>
+<script type="text/javascript" src={% static 'assets/js/datetimepicker.js' %}></script>
+<script type="text/javascript" src={% static 'assets/js/maps.js' %}></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&key={% google_api %}&libraries=places&callback=initMap" async defer></script>
+{% endblock %}

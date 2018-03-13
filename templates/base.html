@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      {% block title %}
+          <title>Taxilla</title>
+      {% endblock %}
+
+      {% block head %}
+          {% include "head.html" %}
+      {% endblock %}
+  </head>
+
+  <body class="header-fixed header-fixed-space">
+    <div class="wrapper">
+      {% block header %}
+          {% include "header.html" %}
+      {% endblock %}
+      {% if messages %}
+      <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>{{ message }}</strong>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% block main %}
+      {% endblock %}
+
+      {% block footer %}
+          {% include "footer.html" %}
+      {% endblock %}
+    </div>
+    {% block foot %}
+        {% include "foot.html" %}
+    {% endblock %}
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        App.init();
+        {% block jquery_init %}
+        {% endblock %}
+      });
+    </script>
+  </body>
+</html>

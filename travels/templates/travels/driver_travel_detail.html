@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+{% load extras %}
+
+{% block title %}
+    <title>Pickup request | Taxilla</title>
+{% endblock %}
+
+{% block main %}
+<!-- Page Content -->
+<!-- Page Content -->
+<div class="container content">
+    <div class="row">
+
+      <div class="col-sm-6 content-boxes-v3">
+        <div class="clearfix margin-bottom-30">
+          <i class="icon-custom icon-md rounded-x icon-bg-u icon-line icon-pointer"></i>
+          <div class="content-boxes-in-v3">
+            <p>Pickup Location</p>
+            <h2 class="heading-sm">{{ object.pickup }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 content-boxes-v3 content-boxes-v3-right sm-margin-bottom-30">
+        <div class="clearfix margin-bottom-30">
+          <i class="icon-custom icon-md rounded-x icon-bg-u icon-line icon-flag"></i>
+          <div class="content-boxes-in-v3">
+            <p>Destination</p>
+            <h2 class="heading-sm">{{ object.dropoff }}</h2>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <div class="row content-boxes-v2 content-boxes-v2-o">
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-calendar"></i>
+              <span><small>Pickup date & time </small>{{ object.date_time }}</span>
+            </h2>
+          </div>
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-users"></i>
+              <span><small>Up to number of passengers</small>{{ object.no_of_passengers }}</span>
+            </h2>
+          </div>
+        </div>
+        <br>
+        <div class="row content-boxes-v2 content-boxes-v2-o">
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-user"></i>
+              <span><small>Passenger's Name</small>{{ object.traveller.first_name }} {{ object.traveller.last_name }}</span>
+            </h2>
+          </div>
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-phone"></i>
+              <span><small>Passenger's Phone number </small>{{ object.traveller.phone }}</span>
+            </h2>
+          </div>
+        </div>
+        <br>
+        <div  class="row content-boxes-v2 content-boxes-v2-o">
+          <div id=hiddenTravelInfo class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-location-arrow"></i>
+              <a id=toPassenger></a>
+            </h2>
+          </div>
+          <div class="col-sm-6 sm-margin-bottom-40">
+            <h2 class="heading-sm overflow-h">
+              <i class="icon-custom rounded-x icon-color-u fa fa-location-arrow"></i>
+              <a id=toDestination></a>
+            </h2>
+          </div>
+        </div>
+        <div class="service-block-v8 service-block-v8-request-detail">
+          <div class="service-block-desc">
+            <h3>Additional Information</h3>
+            <p>
+              <strong>Travel time to pickup location: </strong>{% if object.get_vehicle_waiting_time %}{{ object.get_vehicle_waiting_time }}{% else %}<em>Unknown</em>{% endif %}
+            </p>
+            <p>
+              <strong>Estimated trip time: </strong>{% if object.duration_range %}{{ object.get_duration }}{% else %}<em>Unknown</em>{% endif %}
+            </p>
+            <p>
+              <strong>Trip distance: </strong>{% if object.distance %}{{ object.distance }}{% else %}<em>Unknown</em>{% endif %}
+            </p>
+            <p>
+              <strong>Notes: </strong>{% if object.notes %}{{ object.notes }}{% else %}<em>Notes were not added to the pickup request.</em>{% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div id="map"></div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <br></br>
+    <div class="row text-center">
+      <form action="{% url 'driver-release' travel.id %}" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <button type="button" class="btn-u btn-brd btn-brd-hover btn-u-dark rounded" onclick="window.history.back();">Back</button>
+        <button onclick="return confirm('Are you sure you want to release this request and remove it from your list of tasks?')" class="btn-u btn-u-red rounded">Release this request</button>
+      </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block foot %}
+{{ block.super }}
+<script type="text/javascript">
+    var pickup_data = "{{ object.pickup_data|escapejs }}";
+    var dropoff_data = "{{ object.dropoff_data|escapejs }}";
+    var vehicle_id = "{{ object.assigned_vehicle.id }}";
+    var travel_id = "{{ object.id }}";
+</script>
+<script type="text/javascript" src={% static 'assets/js/maps_view_for_driver.js' %}></script>
+<script type="text/javascript" src={% static 'assets/js/vehicle_location_update.js' %}></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&key={% google_api %}&libraries=places&callback=initMap" async defer></script>
+{% endblock %}

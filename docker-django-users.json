@@ -1,0 +1,20 @@
+[
+{
+    "model": "accounts.TaxillaUser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$RZ19z5Wc7Cq5$9ZViV/0YH/9FuJGbGIPFeFmwPe+bDW/H9xQ/njzst9o=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@inetreco.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-03-28T11:39:14.709Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>My Profile | Taxilla</title>
+{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'assets/css/pages/profile.css' %}">
+{% endblock %}
+
+{% block main %}
+<!-- Page Content -->
+<div class="container content profile">
+  <!-- Profile Content -->
+  <div class="col-md-12">
+    <div class="profile-body margin-bottom-20">
+      <div class="tab-v1">
+        <!-- Navigation bar on top-->
+        <ul class="nav nav-justified nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#profile">Edit Profile</a></li>
+          <li><a data-toggle="tab" href="#passwordTab">Change Password</a></li>
+          <li><a data-toggle="tab" href="#settings">Notification Settings</a></li>
+        </ul>
+        <!-- Content of each tab -->
+        <div class="tab-content">
+        <!-- Profile tab content -->
+          <div id="profile" class="profile-edit tab-pane fade in active">
+            <h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
+            <p>Below are the name and email addresses on file for your account.</p>
+            <br>
+            <!-- Edit profile form -->
+            <form action="" method="post">
+              {% csrf_token %}
+            <dl class="dl-horizontal">
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.first_name.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_first_name-value" class="profile-field">{{ user.first_name }}</label>
+                  <label id= "id_first_name-hidden" class="profile-field-hidden">{{ form.first_name }}</label>
+                  {% if form.first_name.errors %}
+                    <label>{{ form.first_name.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_first_name" onclick="showHiddenField(this.id);">
+                    <i class= "fa fa-pencil"></i>
+                  </a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.last_name.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_last_name-value" class="profile-field">{{ user.last_name }}</label>
+                  <label id= "id_last_name-hidden" class="profile-field-hidden">{{ form.last_name }}</label>
+                  {% if form.last_name.errors %}
+                    <label>{{ form.last_name.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_last_name" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.phone.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_phone-value" class="profile-field">{{ user.phone }}</label>
+                  <label id= "id_phone-hidden" class="profile-field-hidden">{{ form.phone }}</label>
+                  {% if form.phone.errors %}
+                    <label>{{ form.phone.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_phone" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>Email address</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_email-value" class="profile-field">{{ user.email }}</label>
+                  <label id= "id_email-hidden" class="profile-field-hidden">{{ form.email }}</label>
+                  {% if form.email.errors %}
+                    <label>{{ form.email.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_email" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.company.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_company-value" class="profile-field">{{ user.company }}</label>
+                  <label id= "id_company-hidden" class="profile-field-hidden select">{{ form.company }}</label>
+                  {% if form.company.errors %}
+                    <label>{{ form.company.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_company" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.employee_id.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_employee_id-value" class="profile-field">{{ user.employee_id }}</label>
+                  <label id= "id_employee_id-hidden" class="profile-field-hidden">{{ form.employee_id }}</label>
+                  {% if form.employee_id.errors %}
+                    <label>{{ form.employee_id.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_employee_id" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.title.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_title-value" class="profile-field">{{ user.title }}</label>
+                  <label id= "id_title-hidden" class="profile-field-hidden">{{ form.title }}</label>
+                  {% if form.title.errors %}
+                  <label>{{ form.title.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_title" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.department.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_department-value" class="profile-field">{{ user.department }}</label>
+                  <label id= "id_department-hidden" class="profile-field-hidden">{{ form.department }}</label>
+                  {% if form.department.errors %}
+                    <label>{{ form.department.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_department" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.location.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_location-value" class="profile-field">{{ user.location }}</label>
+                  <label id= "id_location-hidden" class="profile-field-hidden">{{ form.location }}</label>
+                  {% if form.location.errors %}
+                    <label>{{ form.location.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_location" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              <dt>
+                <label class="text-primary profile-field"><strong>{{ form.corporate_level.label }}</strong></label>
+              </dt>
+              <dd>
+                <span>
+                  <label id= "id_corporate_level-value" class="profile-field">{{ user.get_corporate_level_display  }}</label>
+                  <label id= "id_corporate_level-hidden" class="profile-field-hidden">{{ form.corporate_level }}</label>
+                  {% if form.corporate_level.errors %}
+                    <label>{{ form.corporate_level.errors }}</label>
+                  {% endif %}
+                  <a class = "pull-right" id= "a_id_corporate_level" onclick="showHiddenField(this.id);"><i class= "fa fa-pencil"></i></a>
+                </span>
+              </dd>
+              <hr>
+
+              {% if user.vip %}
+              <dt><strong>VIP Status </strong></dt>
+              <dd>
+                Yes
+              </dd>
+              <hr>
+              {% endif %}
+              <div class="text-center">
+                <input class="btn-u rounded" type="submit" value="Save changes">
+              </div>
+            </form>
+            <!-- End of edit profile form -->
+          </div>
+          <!-- End of profile tab content -->
+
+          <!-- Change password tab content -->
+          <div id="passwordTab" class="profile-edit tab-pane fade">
+            <h2 class="heading-md">Manage your Security Settings</h2>
+            <p>Feature not implemented yet.</p>
+            <br>
+            <form class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
+            </form>
+          </div>
+          <!-- End of change password tab content -->
+
+          <!-- Change notifications tab content -->
+          <div id="settings" class="profile-edit tab-pane fade">
+            <h2 class="heading-md">Manage your Notifications.</h2>
+            <p>Feature not implemented yet.</p>
+            <br>
+            <form class="sky-form" id="sky-form3" action="#">
+            </form>
+          </div>
+          <!-- End of change notifications tab content -->
+        </div>
+        <!-- End of content of each tab -->
+      </div>
+    </div>
+  </div>
+  <!-- End Profile Content -->
+</div>
+{% endblock %}
+
+{% block foot %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'assets/js/edit_profile_switcher.js' %}"></script>
+{% endblock %}

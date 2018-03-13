@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>Taxilla | Welcome</title>
+{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'assets/plugins/master-slider/masterslider/style/masterslider.css' %}">
+<link rel='stylesheet' href="{% static 'assets/plugins/master-slider/masterslider/skins/black-2/style.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<!--=== Slider ===-->
+<div class="ms-layers-template">
+  <!-- masterslider -->
+  <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
+    <div class="ms-slide" style="z-index: 10">
+      <img src="{% static 'assets/plugins/master-slider/masterslider/style/blank.gif' %}" data-src="{% static 'assets/img/bg/img2.jpg' %}" alt="">
+      <div class="ms-layer ms-promo-info color-light" style="left:15px; top:160px"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="700"
+      data-ease="easeOutExpo"
+      >Welcome</div>
+
+      <div class="ms-layer ms-promo-info ms-promo-info-in color-light" style="left:15px; top:210px"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1000"
+      data-ease="easeOutExpo"
+      ><span class="color-green">{% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}</span> {{ user.last_name }}</div>
+
+      <div class="ms-layer ms-promo-sub color-light" style="left:15px; top:310px"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >{{ site_name }}<br> at your service</div>
+
+
+      <a class="ms-layer btn-u" style="left:15px; top:390px" href="#"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >LEARN MORE</a>
+
+      <a class="ms-layer btn-u btn-u-dark" style="left:150px; top:390px" href="#"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >ABOUT US</a>
+    </div>
+
+    <div class="ms-slide" style="z-index: 13">
+      <img src="{% static 'assets/plugins/master-slider/masterslider/style/blank.gif' %}" data-src="{% static 'assets/img/bg/img4.jpg' %}" alt="">
+
+      <img class="ms-layer" src="{% static 'assets/plugins/master-slider/masterslider/style/blank.gif' %}" data-src="{% static 'assets/img/mockup/hand-black-iphone-l.png' %}" alt=""
+      style="bottom:-10px; left:15px; width:400px; height: auto;"
+      data-effect="bottom(100)"
+      data-duration="2000"
+      data-ease="easeOutExpo"
+      data-type="image"
+      />
+
+      <h3 class="ms-layer ms-promo-info-in color-light"  style="left:450px; top:170px;"
+      data-effect="right(40)"
+      data-duration="2300"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >OPEN</h3>
+
+      <h3 class="ms-layer ms-promo-info-in color-darker"  style="left:450px; top:230px"
+      data-effect="left(40)"
+      data-duration="2300"
+      data-delay="1400"
+      data-ease="easeOutBack"
+      >THIS WEBSITE</h3>
+
+      <h3 class="ms-layer ms-promo-info-in color-darker"  style="left:450px; top:290px"
+      data-effect="left(40)"
+      data-duration="2300"
+      data-delay="1400"
+      data-ease="easeOutBack"
+      >ON <span class="color-light">YOUR MOBILE</span></h3>
+
+      <a class="ms-layer btn-u" style="left:450px; top:370px" href="#"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >LEARN MORE</a>
+
+<!--
+      <a class="ms-layer btn-u btn-u-dark" style="left:580px; top:370px" href="#"
+      data-effect="bottom(40)"
+      data-duration="2000"
+      data-delay="1300"
+      data-ease="easeOutExpo"
+      >DOWNLOAD NOW</a> -->
+    </div>
+
+    <div class="ms-slide" style="z-index: 12">
+    <img src="{% static 'assets/plugins/master-slider/masterslider/style/blank.gif' %}" data-src="{% static 'assets/img/bg/img3.jpg' %}" alt="">
+
+    <h3 class="ms-layer ms-promo-info color-light"  style="left:10px; top:170px"
+    data-effect="bottom(20)"
+    data-duration="2300"
+    data-delay="700"
+    data-ease="easeOutExpo"
+    >24/7</h3>
+
+    <h3 class="ms-layer ms-promo-info-in color-light"  style="left:10px; top:245px"
+    data-effect="left(100)"
+    data-duration="3300"
+    data-delay="1000"
+    data-ease="easeOutExpo"
+    ><span class="color-green">CALL CENTRE</span></h3>
+
+    <h3 class="ms-layer normal-title color-light"  style="left:10px; top:312px"
+    data-effect="bottom(20)"
+    data-duration="2300"
+    data-delay="1300"
+    data-ease="easeOutExpo"
+    >TAKES CARE OF YOUR TRANSPORTATION REQUESTS IN NO TIME</h3>
+
+    <p class="ms-layer ms-promo-sub ms-promo-sub-in color-light"  style="left:10px; top:360px"
+    data-effect="right(40)"
+    data-duration="2300"
+    data-delay="1300"
+    data-ease="easeOutExpo"
+    >FAST, EFFICIENT AND HASSLE FREE</p>
+  </div>
+</div>
+<!-- end of masterslider -->
+</div>
+<!--=== End Slider ===-->
+
+<!--=== Call To Action ===-->
+<div class="call-action-v1 bg-color-light">
+  <div class="container">
+    <div class="call-action-v1-box">
+      {% if not user.is_driver %}
+        <div class="call-action-v1-in">
+          <h3>Create a transportation request here or alternatively give us a call <strong>(050) 777 66 55</strong></h3>
+          <p>Taxilla company provides key transportation services and focuses on helping our clients' needs by creating innovative and easy to use solutions.</p>
+        </div>
+        <div class="call-action-v1-in inner-btn page-scroll">
+          <a href="{% url 'travel-new' %}" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-block">CREATE NEW REQUEST</a>
+        </div>
+      {% else %}
+      <div class="call-action-v1-in">
+        <h3>Check your open requests at the top menu bar or alternatively give us a call <strong>(050) 777 66 55</strong></h3>
+        <p>Taxilla company provides key transportation services and focuses on helping our clients' needs by creating innovative and easy to use solutions.</p>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+<!--=== End Call To Action ===-->
+
+
+<!-- Service Blocks -->
+<div class="content-md">
+  <div class="text-center margin-bottom-50">
+    <h2 class="title-v2 title-center">GUIDELINES</h2>
+    <p class="space-lg-hor">Below are listed general guidelines for the usage of the <span class="color-green">{{ site_name }}</span>. You will be using the bar on the top of this page in order to perform the following actions. Should you have any questions or feedback regarding this website please do not hesitate to contact us by any preferred method. Contact details could be found at the bottom of this page.</p>
+  </div>
+
+  <div class="service-block-v4 service-box-v1">
+		<div class="container content-md">
+			<div class="row">
+        {% for help in view.get_guidelines %}
+				<div class="col-md-4 service-desc md-margin-bottom-50">
+					<i class="{{ help.icon }}"></i>
+					<h3>{{ help.name }}</h3>
+					<p>{{ help.description }}</p>
+				</div>
+        {% endfor %}
+			</div><!--/end row-->
+		</div><!--/end container-->
+	</div>
+</div>
+<!--=== End Service Blocks ===-->
+{% endblock %}
+
+{% block foot %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'assets/js/plugins/style-switcher.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/plugins/master-slider/masterslider/masterslider.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/plugins/master-slider/masterslider/jquery.easing.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/plugins/master-slider-fw.js' %}"></script>
+{% endblock %}
+
+{% block jquery_init %}
+MSfullWidth.initMSfullWidth();
+{% endblock %}

@@ -1,0 +1,24 @@
+Hello,
+
+There's a new request arrived into the Taxilla system.
+
+{{ user }} has requested a pickup from:
+{{ pickup }}
+to
+{{ dropoff }}
+on {{ date_time }}.
+
+Approximate distance is {{ distance }} which will take about {{ duration }}.
+
+{% if notes %}
+Additional notes were included:
+{{ notes }}
+{% endif %}
+
+Click the following link to open the request:
+{{ site }}{% url 'admin:travels_travel_change' id %}
+
+Or alternatively process the request from the Operations Centre.
+
+Regards,
+Taxilla

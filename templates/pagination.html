@@ -1,0 +1,43 @@
+{% load el_pagination_tags %}
+
+<div class="text-center">
+    {% get_pages %}
+    {% if pages.paginated %}
+    <ul class="pagination">
+
+        <li class="page-item">
+            {{ pages.first_as_arrow }}
+        </li>
+
+        {% if pages.previous %}
+        <li class="page-item">
+            {{ pages.previous }}
+        </li>
+        {% endif %}
+
+        {% for page in pages %}
+            {% show_current_number as page_number %}
+            {% if page.number == page_number %}
+                <li class="page-item active">
+                    <a href="{{ page.path }}">
+                        {{ page.number }}<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item"><a href="{{ page.path }}">{{ page.number }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if pages.next %}
+        <li class="page-item">
+            {{ pages.next }}
+        </li>
+        {% endif %}
+
+        <li class="page-item">
+            {{ pages.last_as_arrow }}
+        </li>
+
+    </ul>
+    {% endif %}
+</div>

@@ -1,0 +1,126 @@
+{% load staticfiles %}
+{% load i18n %}
+<title>Sign Up</title>
+
+<link rel="stylesheet" href="{% static 'assets/css/pages/page_log_reg_v2.css' %}">
+{% include "head.html" %}
+
+
+<body>
+  <!--=== Content Part ===-->
+  <div class="container">
+    <!--Reg Block-->
+    <div class="reg-block">
+      {% if not user.is_authenticated %}
+      <div class="reg-block-header">
+        <h2>Sign Up</h2>
+        <p>Already Signed Up? Click <a href="{% url 'home-page' %}">Sign In</a> to login your account.</p>
+      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{ error|escape }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Username" class="form-control" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default_if_none:'' }}" name="{{ form.username.html_name }}">
+        </div>
+        {% if form.username.errors %}
+        {% for error in form.username.errors %}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{ error|escape }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <input type="text" placeholder="E-mail" class="form-control" id="{{ form.email.id_for_label }}" value="{{ form.email.value|default_if_none:'' }}" name="{{ form.email.html_name }}">
+        </div>
+        {% if form.email.errors %}
+        {% for error in form.email.errors %}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{ error|escape }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Password" class="form-control" id="{{ form.password1.id_for_label }}" value="{{ form.password1.value|default_if_none:'' }}" name="{{ form.password1.html_name }}">
+        </div>
+        {% if form.password1.errors %}
+        {% for error in form.password1.errors %}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{ error|escape }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="input-group margin-bottom-20">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input type="password" placeholder="Confirm your password" class="form-control" id="{{ form.password2.id_for_label }}" value="{{ form.password2.value|default_if_none:'' }}" name="{{ form.password2.html_name }}">
+        </div>
+        {% if form.password2.errors %}
+        {% for error in form.password2.errors %}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+                {{ error|escape }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <hr>
+        {% comment "In case we write a TOC. To enable, make sure to add col-md-6 to next div's class" %}
+        <div class="checkbox">
+          <label>
+					  <input type="checkbox">
+					  I read <a target="_blank" href="page_terms.html"> and accepted Terms and Conditions</a>
+				  </label>
+        </div>
+        {% endcomment %}
+
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <input type="submit" class="btn-u btn-block" value="{% trans 'Sign Up' %}" />
+            <input type="hidden" name="next" value="{{ next }}" />
+          </div>
+        </div>
+      </form>
+      {% else %}
+        <div class="reg-block-header">
+          <h2>You are already registered and logged in</h2>
+        </div>
+        <p>
+          <h4 style="text-align: center;">
+            Please click the below button to return to where you've come from
+          </h4>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <button type="button" class="btn-u btn-block" onclick="window.history.back();">Back</button>
+            </div>
+          </div>
+        </p>
+      {% endif %}
+    </div>
+    <!--End Reg Block-->
+  </div><!--/container-->
+  <!--=== End Content Part ===-->
+</body>
+
+{% include "foot.html" %}
+{% include "registration/registration_foot.html" %}

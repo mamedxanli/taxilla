@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>New request from {{ user }}</title>
+</head>
+
+<body>
+
+<p>
+  Hello,
+</p>
+<p>
+  There's a new request arrived into the Taxilla system.
+</p>
+<p>
+  {{ user }} has requested a pickup from:
+  {{ pickup }}
+  to
+  {{ dropoff }}
+  on {{ date_time }}.
+</p>
+<p>
+  Approximate distance is {{ distance }} which will take about {{ duration }}.
+</p>
+{% if notes %}
+<p>
+  Additional notes were included:
+  {{ notes }}
+</p>
+{% endif %}
+<p>
+  Please click <a href="{{ site }}{% url 'admin:travels_travel_change' id %}">here</a> to open the request.
+</p>
+<p>
+  Or alternatively process the request from the Operations Centre.
+</p>
+<p>
+  Regards,
+  Taxilla
+</p>
+
+</body>
+</html>

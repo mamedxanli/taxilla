@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'assets/plugins/backstretch/jquery.backstretch.min.js' %}"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    App.init();
+  });
+</script>
+<script type="text/javascript">
+  $.backstretch([
+    "{% static 'assets/img/bg/baku1.jpg' %}",
+    "{% static 'assets/img/bg/baku2.jpg' %}",
+    "{% static 'assets/img/bg/hac1.jpg' %}",
+    ], {
+      fade: 1000,
+      duration: 7000
+    });
+</script>

@@ -1,0 +1,46 @@
+/* block to customise the display on travel list pages */
+.row-cursor {
+  cursor: pointer;
+}
+
+.table > tbody > tr > td, .table > thead > tr > td {
+	vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+
+    table {
+      border: 0;
+    }
+
+    table thead {
+      display: none;
+    }
+
+    table tr {
+      margin-bottom: 10px;
+      display: block;
+      border-bottom: 2px solid #ddd;
+    }
+
+    table td {
+      display: block;
+      text-align: right;
+      font-size: 13px;
+    }
+
+    table td:first-child {
+      text-align: center;
+    }
+
+    table td:last-child {
+      border-bottom: 0;
+    }
+
+    table td:before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
